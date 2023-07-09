@@ -1,0 +1,26 @@
+#include<graphics.h>
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int flag_x1 =100;
+    int flag_y1 =flag_x1;
+    int times = 20;
+    // Redundadnt
+    int flag_x2 = flag_x1+10*times;
+    int flag_y2 = flag_y1+6*times;
+
+    cout << flag_x2 <<" "<<flag_y2<<endl;
+    int gd,gm;
+    detectgraph(&gd,&gm);
+    initgraph(&gd,&gm,"");
+    setcolor(GREEN);
+    rectangle(flag_x1,flag_y1,flag_x2,flag_y2);
+    setfillstyle(SOLID_FILL,GREEN);
+    floodfill((flag_x1+1),(flag_y1+1),GREEN);
+
+    setcolor(RED);
+    circle((flag_x1+(flag_x2-flag_x1)*0.45),(flag_y1+flag_y2)/2,(flag_y2-flag_y1)*.4);
+    setfillstyle(SOLID_FILL,RED);
+    floodfill((flag_x1+(flag_x2-flag_x1)*0.45),(flag_y1+flag_y2)/2,RED);
+    getchar();
+}

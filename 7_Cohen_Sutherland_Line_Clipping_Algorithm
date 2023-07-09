@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+#include<graphics.h>
+using namespace std;
+int main(){
+    //freopen("7_Cohen_Sutherland_Line_Clipping_Algorithm.txt","r",stdin);
+    int gd,gm;
+    detectgraph(&gd,&gm);
+    initgraph(&gd,&gm,"");
+    double xmin,xmax,ymin,ymax,xdif;
+    xmin = 50;ymin = 50;xmax = 250;ymax = 200;
+    xdif = 300;
+    //cout <<"Enter the coordinates of clipping window: ";
+    //cin >> x1 >> y1 >> x2 >> y2;
+    //getchar();
+    rectangle(xmin,ymin,xmax,ymax);
+    rectangle(xmin+xdif,ymin,xmax+xdif,ymax);
+    int lines;
+    cout <<"Enter the number of lines: ";
+    cin >> lines;
+    while(lines--){
+        double x1,x2,y1,y2,x,y,m;
+        cin >> x1 >> y1 >> x2 >> y2;
+        //x1 = 100;y1 =300;x2 = 300;y2 = 80;
+        m = (y2-y1)/(x2-x1);
+        line(x1,y1,x2,y2);
+        if(x1<xmin){
+            y1 = y1+(xmin-x1)*m;
+            x1 = xmin;
+        }
+        if(x1>xmax){
+            y1 = y1+(xmax-x1)*m;
+            x1 = xmax;
+        }
+        if(y1<ymin){
+            x1 = x1+(ymin-y1)/m;
+            y1 = ymin;
+        }
+        if(y1>ymax){
+            x1 = x1+(ymax-y1)/m;
+            y1 = ymax;
+        }
+
+        if(x2<xmin){
+            y2 = y2+(xmin-x2)*m;
+            x2 = xmin;
+        }
+        if(x2>xmax){
+            y2 = y2+(xmax-x2)*m;
+            x2 = xmax;
+        }
+        if(y2<ymin){
+            x2 = x2+(ymin-y2)/m;
+            y2 = ymin;
+        }
+        if(y2>ymax){
+            x2 = x2+(ymax-y2)/m;
+            y2 = ymax;
+        }
+        line(x1+xdif,y1,x2+xdif,y2);
+        getchar();
+    }
+    getchar();
+}

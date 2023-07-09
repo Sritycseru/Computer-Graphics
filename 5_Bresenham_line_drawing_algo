@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+#include<graphics.h>
+using namespace std;
+int main(){
+    int gd,gm;
+    detectgraph(&gd,&gm);
+    initgraph(&gd,&gm,"");
+    int x1,x2,y1,y2,dx,dy,x,y,p,i;
+    cout <<"Enter the first point:";
+    cin >> x1 >> y1;
+    cout <<"Enter the second point:";
+    cin >> x2 >> y2;
+    getchar();
+    i = 0;
+    dx = x2-x1;
+    dy = y2-y1;
+    p = 2*dy-dx;
+    x = x1;
+    y = y1;
+    while(i<=dx){
+        putpixel(x,y,WHITE);
+        if(p<0){
+            x++;
+            p+=(2*dy);
+        }
+        else{
+            x++;
+            y++;
+            p = p+2*dy-2*dx;
+        }
+        i++;
+    }
+    getchar();
+}
+//100 150
+//300 350

@@ -1,0 +1,97 @@
+#include<graphics.h>
+#include<bits/stdc++.h>
+using namespace std;
+void mainpolygon(double x1,double y1,double x2,double y2){
+	setcolor(BLUE);
+	line(x1,y1,x2,y2);
+	setfillstyle(SOLID_FILL,BLUE);
+}
+int main(){
+	int gd, gm;
+	detectgraph(&gd,&gm);
+	initgraph(&gd, &gm,(char*)"");
+	double xmin,xmax,ymin,ymax,xdif;
+    xmin = 50;ymin = 50;xmax = 250;ymax = 200;
+    xdif = 300;
+    rectangle(xmin,ymin,xmax,ymax);
+    rectangle(xmin+xdif,ymin,xmax+xdif,ymax);
+    //double points [][2] = {{20,100},{100,250},{150,150},{100,20}};
+    double points[8] = {20,100,100,250,150,150,100,20};
+    vector<double> newpoint;
+    for(int i=0;i<8;i+=2){
+    	double x1,y1,x2,y2,m;
+    	x1 = points[i];
+    	y1 = points[i+1];
+    	x2 = points[(i+2)%8];
+    	y2 = points[(i+3)%8];
+    	m = (y2-y1)/(x2-x1);
+    	mainpolygon(x1,y1,x2,y2);
+    	if(x1<xmin){
+            y1 = y1+(xmin-x1)*m;
+            x1 = xmin;
+            newpoint.push_back(x1);
+            newpoint.push_back(y1);
+        }
+        if(x1>xmax){
+            y1 = y1+(xmax-x1)*m;
+            x1 = xmax;
+            newpoint.push_back(x1);
+            newpoint.push_back(y1);
+        }
+        if(y1<ymin){
+            x1 = x1+(ymin-y1)/m;
+            y1 = ymin;
+            newpoint.push_back(x1);
+            newpoint.push_back(y1);
+        }
+        if(y1>ymax){
+            x1 = x1+(ymax-y1)/m;
+            y1 = ymax;
+            newpoint.push_back(x1);
+            newpoint.push_back(y1);
+        }
+
+        if(x2<xmin){
+            y2 = y2+(xmin-x2)*m;
+            x2 = xmin;
+            newpoint.push_back(x2);
+            newpoint.push_back(y2);
+        }
+        if(x2>xmax){
+            y2 = y2+(xmax-x2)*m;
+            x2 = xmax;
+            newpoint.push_back(x2);
+            newpoint.push_back(y2);
+        }
+        if(y2<ymin){
+            x2 = x2+(ymin-y2)/m;
+            y2 = ymin;
+            newpoint.push_back(x2);
+            newpoint.push_back(y2);
+        }
+        if(y2>ymax){
+            x2 = x2+(ymax-y2)/m;
+            y2 = ymax;
+            newpoint.push_back(x2);
+            newpoint.push_back(y2);
+        }
+        setcolor(YELLOW);
+        setfillstyle(SOLID_FILL,YELLOW);
+        line(x1+xdif,y1,x2+xdif,y2);
+	}
+	for(int i=0;i<newpoint.size();i+=2){
+		double x1,y1,x2,y2;
+		x1 = newpoint[i]+xdif;
+    	y1 = newpoint[i+1];
+    	x2 = newpoint[(i+2)%newpoint.size()]+xdif;
+    	y2 = newpoint[(i+3)%newpoint.size()];
+    	setcolor(YELLOW);
+        setfillstyle(SOLID_FILL,YELLOW);
+    	if(x1==x2||y1==y2)
+    	line(x1,y1,x2,y2);
+	}
+	cout << endl;
+	getch();
+	closegraph();
+	return 0;
+}
