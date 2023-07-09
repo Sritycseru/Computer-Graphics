@@ -2,8 +2,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    int flag_x1 =100;
-    int flag_y1 =flag_x1;
+	cout<<"Enter Coordinate axes: ";
+    int flag_x1 ;
+    int flag_y1;
+	cin>>flag_x1>>flag_y1;
+	getchar();
     int times = 20;
     // Redundadnt
     int flag_x2 = flag_x1+10*times;
